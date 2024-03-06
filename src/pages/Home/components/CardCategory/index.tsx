@@ -1,7 +1,7 @@
 import { CardCategoryContainer, DescriptionContainer, ImageContainer, Tag, ButtonNavegation } from "./styles";
 import Star from "../../../../assets/star.svg"
 import { NavLink } from "react-router-dom";
-import { Categories } from "../../../../context/ProductsContext";
+import { Categories } from "../../../../App";
 
 interface CardCategoryProps {
     category: Categories;
