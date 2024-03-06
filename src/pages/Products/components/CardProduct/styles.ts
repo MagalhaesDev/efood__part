@@ -4,6 +4,8 @@ import { colors } from "../../../../styles";
 export const CardProductContainer = styled.div`
       padding: .5rem;
       background-color: ${colors.primaryColor};
+      display: flex;
+      flex-direction: column;
 `
 
 export const ImageContainer = styled.div`

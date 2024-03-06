@@ -1,35 +1,31 @@
 import { CardCategoryContainer, DescriptionContainer, ImageContainer, Tag, ButtonNavegation } from "./styles";
 import Star from "../../../../assets/star.svg"
 import { NavLink } from "react-router-dom";
-import { categoriesProductsProps } from "../../../../context/ProductsContext";
+import { Categories } from "../../../../context/ProductsContext";
 
-interface CardProps {
-    product: categoriesProductsProps;
+interface CardCategoryProps {
+    category: Categories;
 }
 
-export function CardCategory({ product }: CardProps) {
+export function CardCategory({ category }: CardCategoryProps) {
     return (
         <CardCategoryContainer>
             <ImageContainer>
-                <img src={product.img} alt="" />
+                <img src={category.capa} alt="" />
                 <Tag>
-                    {product.tag.map(tag => (
-
-                        <p>{tag}</p>
-
-                    ))}
+                    <p>{category.tipo}</p>
                 </Tag>
             </ImageContainer>
             <DescriptionContainer>
                 <div>
-                    <h2>{product.title}</h2>
+                    <h2>{category.titulo}</h2>
                     <div>
-                        <p>{product.avaliation}</p>
+                        <p>{category.avaliacao}</p>
                         <img src={Star} alt="Estrela Amarela" />
                     </div>
                 </div>
-                <p>{product.description}</p>
-                <NavLink to={`/products?id=${product.id}`}>
+                <p>{category.descricao}</p>
+                <NavLink to={`/products/${category.id}`}>
                     <ButtonNavegation>Saiba Mais</ButtonNavegation>
                 </NavLink>
             </DescriptionContainer>

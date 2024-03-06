@@ -1,18 +1,31 @@
 import { CardProductContainer, DescriptionContainer, ImageContainer, ButtonAddCart } from "./styles";
-import imageProduct from "../../../../assets/imageproduct.png"
+import { Product } from "../Product";
+import { useState } from "react";
+import { Menu } from "../../../../App";
+
+interface CardProductsProps {
+    product: Menu
+}
+
+export function CardProduct({ product }: CardProductsProps) {
+    const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)
+
+    function modalProducts ()  {
+        setIsOpenModalProduct(!isOpenModalProduct)
+    }
 
 
-export function CardProduct() {
     return (
-        <CardProductContainer>
-            <ImageContainer>
-                <img src={imageProduct} alt="" />
-            </ImageContainer>
-            <DescriptionContainer>
-                <h2>Pizza Marguerita</h2>
-                <p>A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!</p>
-                <ButtonAddCart>Adicionar ao carrinho</ButtonAddCart>
-            </DescriptionContainer>
-        </CardProductContainer>
+            <CardProductContainer>
+                <ImageContainer>
+                    <img src={product.foto} alt="" />
+                </ImageContainer>
+                <DescriptionContainer>
+                    <h2>{product.nome}</h2>
+                    <p>{product.descricao.length > 180 ? `${product.descricao.slice(0, 180)} ...` : product.descricao}</p>
+                    <ButtonAddCart onClick={() => modalProducts()}>Adicionar ao carrinho</ButtonAddCart>
+                </DescriptionContainer>
+                {isOpenModalProduct && (<Product modalProducts={modalProducts} product={product} />)}
+            </CardProductContainer>
     )
 }

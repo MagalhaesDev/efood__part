@@ -1,16 +1,17 @@
 import { HomeContainer, CardsCategoriesContainer } from "./styles";
 import { CardCategory } from "./components/CardCategory";
-import { useContext } from "react";
-import { ProductsContext } from "../../context/ProductsContext";
+import { useGetCategoriesQuery } from "../../services/api";
 
 export function Home() {
-  const { categoriesProducts } = useContext(ProductsContext)
+  const { data: categories, isLoading } = useGetCategoriesQuery()
+  
+  if (isLoading || !categories) return <h2>Carregando</h2>
 
   return (
     <HomeContainer >
       <CardsCategoriesContainer>
-        {categoriesProducts.map(product => (
-          <CardCategory product={product} />
+        {categories.map(category => (
+          <CardCategory category={category} key={category.id} />
         ))}
       </CardsCategoriesContainer>
     </HomeContainer>

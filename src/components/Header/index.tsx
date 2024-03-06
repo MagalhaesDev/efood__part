@@ -1,19 +1,22 @@
 import { BackgroundImage, HeaderContainer, HeaderProducts, Logo, TitleProduct } from "./styles";
 import background from "../../assets/background.jpg"
 import logo from "../../assets/logo.svg"
-import { useContext } from "react";
-import { ProductsContext } from "../../context/ProductsContext";
-import { useLocation } from "react-router-dom";
+
 import apresentacao from '../../assets/apresentacao.png'
+import { useParams } from "react-router-dom";
+import { useGetCategoriesQuery } from "../../services/api";
 
 export function Header() {
-    const { categoriesProducts } = useContext(ProductsContext)
-    const queryParams = new URLSearchParams(useLocation().search);
-    const idParams = Number(queryParams.get('id'));
+    const { data: categories, isLoading } = useGetCategoriesQuery()
+    const { id } = useParams();
+  
+    if (isLoading || !categories) return <h2>Carregando</h2>
+
+
     let categorySellected;
 
-    if (idParams) {
-        categorySellected = categoriesProducts.find(category => category.id === idParams)
+    if (id) {
+        categorySellected = categories.find(category => category.id === Number(id))
     }
 
     return (
@@ -28,11 +31,9 @@ export function Header() {
                     <TitleProduct>
                         <div>
                             <div>
-                                {categorySellected.tag.map(tag => (
-                                    <p>{tag}</p>
-                                ))}
+                                <p>{categorySellected.tipo}</p>
                             </div>
-                            <h2>{categorySellected.title}</h2>
+                            <h2>{categorySellected.titulo}</h2>
                         </div>
                         <img src={apresentacao} alt="" />
                     </TitleProduct></>
