@@ -17,7 +17,7 @@ export const ProductContainer = styled.div`
 
 export const ProductContent = styled.div`
        background-color: ${colors.primaryColor};
-       width: 80%;
+       width: 64rem;
        min-height: 21.5rem;
        padding: 2rem;
        position: relative;

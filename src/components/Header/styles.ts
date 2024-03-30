@@ -24,8 +24,9 @@ export const HeaderProducts = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 2.5rem;
+    width: 64rem;
     
     p {
         font-weight: bold;
@@ -36,6 +37,7 @@ export const BackgroundImage = styled.img`
     position: absolute;
     z-index: -2;
     height: 100%;
+    width: 100%;
 `
 
 export const Logo = styled.img`
@@ -49,13 +51,16 @@ export const TitleProduct = styled.div`
    height: 17.5rem;
    width: 100%;
    background-size: cover;
+   display: flex;
+   justify-content: center;
 
    & > div {
     height: 100%;
+    width: 64rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1.5rem 10.625rem;
+    padding: 1.5rem 0rem;
     font-size: 2rem;
     
 
@@ -66,11 +71,14 @@ export const TitleProduct = styled.div`
 
         p {
             color: #fff;
+            font-weight: lighter;
+            font-size: 2rem;
         }
     }
 
     h2 {
         color: #fff;
+        font-size: 2rem;
     }
    }
 
