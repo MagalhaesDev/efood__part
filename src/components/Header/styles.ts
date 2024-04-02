@@ -31,6 +31,18 @@ export const HeaderProducts = styled.div`
     p {
         font-weight: bold;
     }
+
+    button {
+        font-weight: bold;
+        border: none;
+        background-color: transparent;
+        font-size: 1.125rem;
+        cursor: pointer;
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
 `
 
 export const BackgroundImage = styled.img`
@@ -84,6 +96,7 @@ export const TitleProduct = styled.div`
 
    img {
     position: absolute;
+    object-fit: cover;
     top: 0;
     z-index: -1;
     height: 100%;

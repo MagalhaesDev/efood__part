@@ -1,12 +1,16 @@
 import { BackgroundImage, HeaderContainer, HeaderProducts, Logo, TitleProduct } from "./styles";
 import background from "../../assets/background.jpg"
 import logo from "../../assets/logo.svg"
-
-import apresentacao from '../../assets/apresentacao.png'
 import { useParams } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../services/api";
+import { useState } from "react";
+import { Cart } from "../../pages/Products/components/Cart";
+import { RootReducer } from "../../store";
+import { useSelector } from "react-redux";
 
 export function Header() {
+    const [isOpen,setIsOpen] = useState(false)
+    const cart = useSelector((state: RootReducer) => state.carrinho.itens)
     const { data: categories, isLoading } = useGetCategoriesQuery()
     const { id } = useParams();
   
@@ -19,6 +23,10 @@ export function Header() {
         categorySellected = categories.find(category => category.id === Number(id))
     }
 
+    function handleOpenCart() {
+        setIsOpen(!isOpen)
+    }
+
     return (
         <HeaderContainer>
             {categorySellected ? (
@@ -26,7 +34,7 @@ export function Header() {
                     <HeaderProducts>
                         <p>Restaurantes</p>
                        <img src={logo} alt="Imagem de fundo com diversos talheres (garfos e facas)" />
-                       <p>0 produto(s) no carrinho</p>
+                       <button disabled={cart.length <= 0} onClick={() => handleOpenCart()}>{cart.length} produto(s) no carrinho</button>
                     </HeaderProducts>
                     <TitleProduct>
                         <div>
@@ -35,7 +43,7 @@ export function Header() {
                             </div>
                             <h2>{categorySellected.titulo}</h2>
                         </div>
-                        <img src={apresentacao} alt="" />
+                        <img src={categorySellected.capa} alt="" />
                     </TitleProduct></>
             ) :
                 (
@@ -44,6 +52,7 @@ export function Header() {
                         <h1>Viva experiências gastronômicas no conforto da sua casa</h1></>)
             }
             <BackgroundImage src={background} alt="Imagem de fundo com diversos talheres (garfos e facas)" />
+            {isOpen && cart.length > 0 && <Cart handleOpenCart={handleOpenCart}/>}
         </HeaderContainer>
     )
 }
